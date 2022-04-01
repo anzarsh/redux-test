@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
+import { addCashAction, removeCashAction } from "./store/cash-reducer";
+import { addCustomerAction, removeCustomerAction } from "./store/customer-reducer";
 
 function App() {
   const dispatch = useDispatch();
   const cash = useSelector(state => state.cash.cash);
   const customers = useSelector(state => state.customers.customers);
 
-  console.log('customers', customers);
-
   const handleAddCustomer = () => {
     const newCustomer = {
       id: Date.now(),
       name: prompt(),
-    }
-    dispatch({ type: 'ADD_CUSTOMER', payload: newCustomer })
+    };
+    dispatch(addCustomerAction(newCustomer));
   }
 
   return (
@@ -21,13 +21,13 @@ function App() {
       <div>
         <button
           type="button"
-          onClick={() => dispatch({ type: 'ADD_CASH', payload: 5 })}
+          onClick={() => dispatch(addCashAction(5))}
         >
           Добавить наличку
         </button>
         <button
           type="button"
-          onClick={() => dispatch({ type: 'GET_CASH', payload: 5 })}
+          onClick={() => dispatch(removeCashAction(5))}
         >
           Снять наличку
         </button>
@@ -43,7 +43,7 @@ function App() {
         {customers.map(c => (
           <div
             key={c.id}
-            onClick={() => dispatch({ type: 'REMOVE_CUSTOMER', payload: c.id })}
+            onClick={() => dispatch(removeCustomerAction(c.id))}
           >
             {c.name}
           </div>
