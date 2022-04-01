@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { fetchCustomers } from "./async-actions/customers";
 import { addCashAction, removeCashAction } from "./store/cash-reducer";
 import { addCustomerAction, removeCustomerAction } from "./store/customer-reducer";
 
@@ -37,6 +38,12 @@ function App() {
           onClick={handleAddCustomer}
         >
           Добавить пользователя
+        </button>
+        <button
+          type="button"
+          onClick={() => dispatch(fetchCustomers())}
+        >
+          Добавить несколько пользователей
         </button>
       </div>
       <div>
